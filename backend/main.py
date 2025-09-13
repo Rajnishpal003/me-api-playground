@@ -12,7 +12,11 @@ app = FastAPI(title="Me-API Playground", version="1.0.0")
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, specify exact origins
+    allow_origins=[
+    "http://localhost:3000",              # local dev
+    "https://me-api-playground-rose.vercel.app/"    # deployed frontend
+]
+,  # In production, specify exact origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -225,4 +229,7 @@ async def search_profile(q: str, db: Session = Depends(get_db)):
     return results
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    import os
+
+    port = int(os.environ.get("PORT", 8000))  # Use Render's port or fallback to 8000 locally
+    uvicorn.run(app, host="0.0.0.0", port=port)
