@@ -1,19 +1,13 @@
-#!/usr/bin/env python3
-"""
-Development server runner for Me-API Playground
-"""
+import os
 import uvicorn
 from main import app
 
 if __name__ == "__main__":
-    print("Starting Me-API Playground Backend...")
-    print("API Documentation: http://localhost:8000/docs")
-    print("Health Check: http://localhost:8000/health")
-    
+    port = int(os.environ.get("PORT", 8000))  # use Render's PORT, fallback 8000 locally
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
-        port=8000,
-        reload=True,  # Enable auto-reload for development
+        port=port,
+        reload=os.environ.get("RENDER") is None,  # disable reload in production
         log_level="info"
     )

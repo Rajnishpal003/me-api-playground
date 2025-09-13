@@ -7,6 +7,7 @@ import SearchView from "./components/SearchView"
 import HealthCheck from "./components/HealthCheck"
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000"
+const NEXT_PUBLIC_API_URL = "https://me-api-playground-1-krl1.onrender.com"
 
 function App() {
   const [currentView, setCurrentView] = useState("profile")
