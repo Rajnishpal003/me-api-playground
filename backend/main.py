@@ -7,7 +7,7 @@ import uvicorn
 from models import Profile, get_db, create_tables, seed_default_profile
 from collections import Counter
 
-app = FastAPI(title="Me-API Playground", version="1.0.0")
+app = FastAPI(title="profile Playground", version="1.0.0")
 
 # CORS middleware
 app.add_middleware(
