@@ -6,8 +6,8 @@ import ProjectsView from "./components/ProjectsView"
 import SearchView from "./components/SearchView"
 import HealthCheck from "./components/HealthCheck"
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000"
-
+// Strip trailing slash to avoid double slashes in fetch URLs
+const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:8000").replace(/\/$/, "")
 
 function App() {
   const [currentView, setCurrentView] = useState("profile")
@@ -41,7 +41,7 @@ function App() {
               Search
             </button>
           </nav>
-          <HealthCheck />
+          <HealthCheck apiUrl={API_URL} />
         </div>
       </header>
 

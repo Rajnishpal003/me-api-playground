@@ -9,19 +9,22 @@ from collections import Counter
 
 app = FastAPI(title="profile Playground", version="1.0.0")
 
+origins = [
+    "https://me-api-playground-rose.vercel.app",  # your frontend
+    "http://localhost:3000",   # optional: for local dev
+]
+
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-    "http://localhost:3000",              # local dev
-    "https://me-api-playground-rose.vercel.app/"    # deployed frontend
-]
-,  # In production, specify exact origins
+    allow_origins=origins,       # In production, specify exact origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+@app.get("/")
+def read_root():
+    return {"status": "Backend is running 🚀"}
 # Pydantic models for request/response
 class ProjectModel(BaseModel):
     title: str
